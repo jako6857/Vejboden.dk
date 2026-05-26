@@ -262,5 +262,10 @@ GET /vejboder?produkt=æbler
 ## Mulige udvidelser
 
 - Chat mellem køber og sælger
+
+
+
+
+
 - Betalingsintegration
 - Notifikationer
