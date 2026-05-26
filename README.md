@@ -272,3 +272,5 @@ GET /vejboder?produkt=æbler
 
 
 Figma fil: https://www.figma.com/design/j3tEOMTjnlfj2sYAmwIpv9/Vejboden-pwa?node-id=0-1&t=8L9RPXp7JoycDBGF-1
+
+node.js, mysql, next, Leaflet, Netlify
