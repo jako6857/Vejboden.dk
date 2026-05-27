@@ -1,0 +1,51 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "Vejbod_db",
+            "group": "Vejbod_db",
+            "database": "Vejbod_db",
+            "username": "jegerentest6",
+            "askForPassword": true
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "username": "postgres",
+            "name": "Vejbod_db2",
+            "group": "Vejbod_db2",
+            "database": "Vejbod_db",
+            "password": ""
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "Vejbod_db4",
+            "group": "Vejbod_db4",
+            "database": "Vejbod_db",
+            "username": "postgres"
+        }
+    ]
+}

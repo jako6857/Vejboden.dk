@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id             Int      @id @default(autoincrement())
+  navn           String
+  email          String   @unique
+  oauth_provider String?
+  vejboder       Vejbod[]
+}
+
+model Vejbod {
+  id        Int      @id @default(autoincrement())
+  navn      String
+  lat       Float
+  lng       Float
+  produkter String[]
+  ejer_id   Int
+  rating    Float    @default(0)
+  ejer      User     @relation(fields: [ejer_id], references: [id])
+}
