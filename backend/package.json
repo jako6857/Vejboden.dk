@@ -9,8 +9,8 @@
     "dev": "nodemon server.js"
   },
   "prisma": {
-  "seed": "node prisma/seed.js"
-},
+    "seed": "node prisma/seed.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -19,8 +19,12 @@
     "@prisma/client": "6.19.3",
     "cors": "^2.8.6",
     "express": "^5.2.1",
+    "express-session": "^1.19.0",
     "helmet": "^8.2.0",
-    "mysql2": "^3.22.3"
+    "mysql2": "^3.22.3",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-microsoft": "^2.1.0"
   },
   "devDependencies": {
     "dotenv": "^17.4.2",
