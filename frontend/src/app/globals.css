@@ -21,7 +21,8 @@
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
 
-  --transition: 200ms ease;
+  --transition-fast: 150ms;
+  --transition-normal: 200ms;
 }
 
 * {
@@ -45,9 +46,9 @@ a {
 }
 
 button {
+  border: none;
   font-family: inherit;
   cursor: pointer;
-  border: none;
 }
 
 img {

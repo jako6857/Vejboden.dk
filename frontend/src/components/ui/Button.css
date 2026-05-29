@@ -6,10 +6,10 @@
 
   border-radius: var(--radius-lg);
 
-  transition: var(--transition);
-
   font-size: 16px;
   font-weight: 500;
+
+  transition: var(--transition-normal);
 }
 
 .button:hover {
