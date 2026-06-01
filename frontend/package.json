@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "test": "npm run lint",
+    "ci": "npm run test && npm run build",
     "start": "next start",
     "lint": "eslint"
   },
