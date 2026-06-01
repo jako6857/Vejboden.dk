@@ -60,9 +60,10 @@ export default function Navbar() {
       {/* MOBILE MENU */}
       {open && (
         <div className="mobile-menu">
-          <a href="#">Home</a>
           <a href="#">Kort</a>
+          <a href="#">Vejboder</a>
           <a href="#">Om os</a>
+          <a href="#">Kontakt</a>
         </div>
       )}
     </header>
