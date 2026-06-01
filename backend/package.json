@@ -18,8 +18,10 @@
   "dependencies": {
     "@prisma/client": "6.19.3",
     "cors": "^2.8.6",
+    "csurf": "^1.11.0",
     "express": "^5.2.1",
     "express-session": "^1.19.0",
+    "express-validator": "^7.3.2",
     "helmet": "^8.2.0",
     "mysql2": "^3.22.3",
     "passport": "^0.7.0",

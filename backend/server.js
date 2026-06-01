@@ -1,6 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const session = require("express-session");
+const helmet = require("helmet");
+const csurf = require("csurf");
+const { body, param, validationResult } = require("express-validator");
 const passport = require("passport");
 const { Strategy: GoogleStrategy } = require("passport-google-oauth20");
 require("dotenv").config();
@@ -10,14 +13,37 @@ const app = express();
 const prisma = new PrismaClient();
 
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", 'https://accounts.google.com'],
+      connectSrc: ["'self'", 'https://accounts.google.com'],
+      imgSrc: ["'self'", 'data:'],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+    },
+  },
+}));
 app.use(express.json());
 app.use(session({
   secret: process.env.SESSION_SECRET || "dev-secret",
   resave: false,
   saveUninitialized: false,
+  cookie: {
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+  }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+// CSRF protection (stateful sessions)
+app.use(csurf());
+
+// expose CSRF token for clients (fetch before mutating requests)
+app.get('/csrf-token', (req, res) => {
+  res.json({ csrfToken: req.csrfToken() });
+});
 
 // Google Strategy
 passport.use(new GoogleStrategy({
@@ -55,7 +81,7 @@ passport.deserializeUser(async (id, done) => {
 
 // Auth routes
 app.get("/auth/google",
-  passport.authenticate("google", { scope: ["profile", "email"] })
+  passport.authenticate("google", { scope: ["profile", "email"], state: true })
 );
 
 app.get("/auth/google/callback",
@@ -93,7 +119,17 @@ app.get("/vejboder", async (req, res) => {
   }
 });
 
-app.post("/vejboder", async (req, res) => {
+const validateVejbod = [
+  body('navn').isString().isLength({ min: 1 }).trim().escape(),
+  body('lat').isFloat({ min: -90, max: 90 }).toFloat(),
+  body('lng').isFloat({ min: -180, max: 180 }).toFloat(),
+  body('produkter').optional().isArray(),
+  body('ejer_id').optional().isInt().toInt(),
+];
+
+app.post("/vejboder", validateVejbod, async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
   try {
     const { navn, lat, lng, produkter, ejer_id } = req.body;
     const vejbod = await prisma.vejbod.create({
@@ -105,7 +141,17 @@ app.post("/vejboder", async (req, res) => {
   }
 });
 
-app.put("/vejboder/:id", async (req, res) => {
+const validateVejbodUpdate = [
+  param('id').isInt().toInt(),
+  body('navn').optional().isString().trim().escape(),
+  body('lat').optional().isFloat({ min: -90, max: 90 }).toFloat(),
+  body('lng').optional().isFloat({ min: -180, max: 180 }).toFloat(),
+  body('produkter').optional().isArray(),
+];
+
+app.put("/vejboder/:id", validateVejbodUpdate, async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
   try {
     const { navn, lat, lng, produkter } = req.body;
     const vejbod = await prisma.vejbod.update({
