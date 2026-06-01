@@ -63,6 +63,22 @@ img {
   padding-inline: 32px;
 }
 
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  color: var(--charcoal);
+}
+
+.rating .reviews {
+  color: var(--stone-gray);
+  font-size: 12px;
+}
+
 /* TABLET */
 @media (max-width: 1024px) {
   .container {

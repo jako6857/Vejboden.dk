@@ -1,5 +1,6 @@
 import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/layout/Hero";
+import Footer from "@/components/layout/Footer";
 
 import FilterPills from "@/components/ui/FilterPills";
 
@@ -10,13 +11,11 @@ import { stalls } from "@/data/stalls";
 export default function Home() {
   return (
     <main>
-
       <Navbar />
 
       <Hero />
 
       <section className="container">
-
         <FilterPills />
 
         <div
@@ -35,8 +34,9 @@ export default function Home() {
             />
           ))}
         </div>
-
       </section>
+
+      <Footer />
     </main>
   );
 }

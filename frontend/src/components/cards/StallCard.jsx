@@ -1,7 +1,7 @@
-import {
-  MapPin,
-  Star,
-} from "lucide-react";
+import { MapPin } from "lucide-react";
+
+import RatingStars from "../ui/RatingStars";
+import RateButton from "../ui/RateButton";
 
 import "./StallCard.css";
 
@@ -11,15 +11,10 @@ export default function StallCard({
   return (
     <article className="stall-card">
 
-      {/* IMAGE */}
-      <div className="stall-image">
-        🌾
-      </div>
+      <div className="stall-image"></div>
 
-      {/* CONTENT */}
       <div className="stall-content">
 
-        {/* HEADER */}
         <div className="stall-header">
 
           <div>
@@ -34,25 +29,14 @@ export default function StallCard({
             </div>
           </div>
 
-          <div className="rating">
-            <Star
-              size={16}
-              fill="#F2994A"
-            />
+          <RatingStars
+            rating={stall.rating}
+            reviews={stall.reviews}
+          />
 
-            <span>
-              {stall.rating}
-            </span>
-
-            <small>
-              ({stall.reviews})
-            </small>
-          </div>
         </div>
 
-        {/* TAGS */}
         <div className="tags">
-
           {stall.products.map(
             (product) => (
               <span
@@ -63,15 +47,16 @@ export default function StallCard({
               </span>
             )
           )}
-
         </div>
 
-        {/* BUTTON */}
         <button className="details-btn">
           Se detaljer
         </button>
 
+        <RateButton />
+
       </div>
+
     </article>
   );
 }

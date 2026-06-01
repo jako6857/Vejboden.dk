@@ -108,3 +108,113 @@
 .details-btn:hover {
   background: var(--earth-brown);
 }
+
+.rate-btn {
+  width: 100%;
+
+  margin-top: 12px;
+
+  padding: 12px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: var(--harvest-green);
+
+  color: white;
+
+  font-size: 16px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.rate-btn:hover {
+  background: var(--earth-brown);
+}
+
+.modal-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  background: rgba(
+    0,
+    0,
+    0,
+    0.5
+  );
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  z-index: 999;
+}
+
+.rating-modal {
+  background: white;
+
+  padding: 32px;
+
+  border-radius: 16px;
+
+  width: 90%;
+
+  max-width: 420px;
+}
+
+.star-picker {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  margin: 24px 0;
+}
+
+.star-picker button {
+  background: none;
+
+  border: none;
+
+  cursor: pointer;
+}
+
+.modal-actions {
+  display: flex;
+
+  gap: 12px;
+}
+
+.cancel-btn,
+.submit-btn {
+  flex: 1;
+
+  padding: 12px;
+
+  border-radius: 12px;
+
+  border: none;
+
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background: var(
+    --light-gray
+  );
+}
+
+.submit-btn {
+  background: var(
+    --harvest-green
+  );
+
+  color: white;
+}
