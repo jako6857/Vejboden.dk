@@ -23,6 +23,7 @@ model Vejbod {
   lat       Float
   lng       Float
   produkter String[]
+  åbningstider String @default("")
   ejer_id   Int
   rating    Float    @default(0)
   ejer      User     @relation(fields: [ejer_id], references: [id])

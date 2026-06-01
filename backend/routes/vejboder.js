@@ -11,6 +11,7 @@ const validateVejbod = [
   body("lat").isFloat({ min: -90, max: 90 }).toFloat(),
   body("lng").isFloat({ min: -180, max: 180 }).toFloat(),
   body("produkter").optional().isArray(),
+  body("åbningstider").optional().isString().trim().escape(),
   body("ejer_id").optional().isInt().toInt(),
 ];
 
@@ -20,6 +21,7 @@ const validateVejbodUpdate = [
   body("lat").optional().isFloat({ min: -90, max: 90 }).toFloat(),
   body("lng").optional().isFloat({ min: -180, max: 180 }).toFloat(),
   body("produkter").optional().isArray(),
+  body("åbningstider").optional().isString().trim().escape(),
 ];
 
 router.get("/", isAuthenticated, async (req, res) => {
@@ -58,9 +60,9 @@ router.post("/", isAuthenticated, validateVejbod, async (req, res) => {
   }
 
   try {
-    const { navn, lat, lng, produkter, ejer_id } = req.body;
+    const { navn, lat, lng, produkter, åbningstider, ejer_id } = req.body;
     const vejbod = await prisma.vejbod.create({
-      data: { navn, lat, lng, produkter, ejer_id },
+      data: { navn, lat, lng, produkter, åbningstider, ejer_id },
     });
     res.status(201).json(vejbod);
   } catch (error) {
@@ -76,10 +78,10 @@ router.put("/:id", isAuthenticated, validateVejbodUpdate, async (req, res) => {
   }
 
   try {
-    const { navn, lat, lng, produkter } = req.body;
+    const { navn, lat, lng, produkter, åbningstider } = req.body;
     const vejbod = await prisma.vejbod.update({
       where: { id: parseInt(req.params.id) },
-      data: { navn, lat, lng, produkter },
+      data: { navn, lat, lng, produkter, åbningstider },
     });
     res.json(vejbod);
   } catch (error) {
