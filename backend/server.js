@@ -37,6 +37,14 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Middleware to check if user is logged in
+const isAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.status(401).json({ error: "Du skal være logget ind" });
+};
+
 // CSRF protection (stateful sessions)
 app.use(csurf());
 
@@ -107,7 +115,7 @@ app.get("/auth/logout", (req, res) => {
 });
 
 // Vejboder routes
-app.get("/vejboder", async (req, res) => {
+app.get("/vejboder", isAuthenticated, async (req, res) => {
   try {
     const { produkt } = req.query;
     const vejboder = await prisma.vejbod.findMany({
@@ -127,7 +135,7 @@ const validateVejbod = [
   body('ejer_id').optional().isInt().toInt(),
 ];
 
-app.post("/vejboder", validateVejbod, async (req, res) => {
+app.post("/vejboder", isAuthenticated, validateVejbod, async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
   try {
@@ -149,7 +157,7 @@ const validateVejbodUpdate = [
   body('produkter').optional().isArray(),
 ];
 
-app.put("/vejboder/:id", validateVejbodUpdate, async (req, res) => {
+app.put("/vejboder/:id", isAuthenticated, validateVejbodUpdate, async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
   try {
@@ -164,7 +172,7 @@ app.put("/vejboder/:id", validateVejbodUpdate, async (req, res) => {
   }
 });
 
-app.delete("/vejboder/:id", async (req, res) => {
+app.delete("/vejboder/:id", isAuthenticated, async (req, res) => {
   try {
     await prisma.vejbod.delete({
       where: { id: parseInt(req.params.id) },
@@ -174,6 +182,19 @@ app.delete("/vejboder/:id", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+app.get("/vejboder/:id", isAuthenticated, async (req, res) => {
+  try {
+    const vejbod = await prisma.vejbod.findUnique({
+      where: { id: parseInt(req.params.id) },
+    });
+    if (!vejbod) return res.status(404).json({ error: "Vejbod ikke fundet" });
+    res.json(vejbod);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
