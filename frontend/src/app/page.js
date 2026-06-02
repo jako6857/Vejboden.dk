@@ -1,6 +1,7 @@
 import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/layout/Hero";
 import Footer from "@/components/layout/Footer";
+import CookieBanner from "@/components/ui/CookieBanner";
 
 import FilterPills from "@/components/ui/FilterPills";
 
@@ -37,6 +38,7 @@ export default function Home() {
       </section>
 
       <Footer />
+      <CookieBanner />
     </main>
   );
 }
