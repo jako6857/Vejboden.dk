@@ -22,6 +22,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  color: inherit;
 }
 
 .logo-box {
@@ -49,11 +50,14 @@
   gap: 32px;
 }
 
-.desktop-nav a {
+.desktop-nav a,
+.mobile-menu a {
   transition: 150ms;
+  color: var(--charcoal);
 }
 
-.desktop-nav a:hover {
+.desktop-nav a:hover,
+.mobile-menu a:hover {
   color: var(--harvest-green);
 }
 

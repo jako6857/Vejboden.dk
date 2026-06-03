@@ -16,9 +16,14 @@ export default function RatingModal({
   return (
     <div className="modal-overlay">
 
-      <div className="rating-modal">
+      <div
+          className="rating-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="rating-title"
+        >
 
-        <h2>
+        <h2 id="rating-title">
           Bedøm denne vejbod
         </h2>
 

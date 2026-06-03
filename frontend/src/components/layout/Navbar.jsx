@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 import {
@@ -17,33 +18,57 @@ export default function Navbar() {
 
   return (
     <header className="navbar">
+
       <div className="container navbar-inner">
 
         {/* LOGO */}
-        <div className="logo-wrapper">
+        <Link
+          href="/"
+          className="logo-wrapper"
+        >
           <div className="logo-box">
             <MapPin size={22} />
           </div>
 
           <h2>Vejboden.dk</h2>
-        </div>
+        </Link>
 
         {/* DESKTOP NAV */}
-        <nav className="desktop-nav">
-          <a href="#">Kort</a>
-          <a href="#">Vejboder</a>
-          <a href="#">Om os</a>
-          <a href="#">Kontakt</a>
+        <nav
+          className="desktop-nav"
+          aria-label="Hovednavigation"
+        >
+          <Link href="/">
+            Forside
+          </Link>
+
+          <Link href="/stalls">
+            Vejboder
+          </Link>
+
+          <Link href="/create-stall">
+            Opret vejbod
+          </Link>
+
+          <Link href="/privacy">
+            Privatliv
+          </Link>
         </nav>
 
         {/* RIGHT SIDE */}
         <div className="navbar-actions">
-          <button className="profile-btn">
+
+          <button
+            className="profile-btn"
+            aria-label="Profil"
+          >
             <User size={20} />
           </button>
 
           <button
             className="menu-btn"
+            aria-label="Åbn menu"
+            aria-expanded={open}
             onClick={() =>
               setOpen(!open)
             }
@@ -54,18 +79,54 @@ export default function Navbar() {
               <Menu size={24} />
             )}
           </button>
+
         </div>
+
       </div>
 
       {/* MOBILE MENU */}
       {open && (
         <div className="mobile-menu">
-          <a href="#">Kort</a>
-          <a href="#">Vejboder</a>
-          <a href="#">Om os</a>
-          <a href="#">Kontakt</a>
+
+          <Link
+            href="/"
+            onClick={() =>
+              setOpen(false)
+            }
+          >
+            Forside
+          </Link>
+
+          <Link
+            href="/stalls"
+            onClick={() =>
+              setOpen(false)
+            }
+          >
+            Vejboder
+          </Link>
+
+          <Link
+            href="/create-stall"
+            onClick={() =>
+              setOpen(false)
+            }
+          >
+            Opret vejbod
+          </Link>
+
+          <Link
+            href="/privacy"
+            onClick={() =>
+              setOpen(false)
+            }
+          >
+            Privatliv
+          </Link>
+
         </div>
       )}
+
     </header>
   );
 }

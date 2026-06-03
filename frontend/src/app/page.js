@@ -17,6 +17,7 @@ export default function Home() {
       <Hero />
 
       <section className="container">
+
         <FilterPills />
 
         <div
@@ -35,9 +36,11 @@ export default function Home() {
             />
           ))}
         </div>
+
       </section>
 
       <Footer />
+
       <CookieBanner />
     </main>
   );
