@@ -2,6 +2,8 @@ import "./leaflet.scss";
 import "leaflet/dist/leaflet.css";
 import { LayersControl, LayerGroup } from "react-leaflet";
 
+import { supabase } from "./supabaseClient";
+
 import {
   MapContainer,
   TileLayer,
@@ -10,6 +12,9 @@ import {
   useMapEvents,
 } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
+
+
+
 
 import { Icon, divIcon, point } from "leaflet";
 import { useState, useEffect } from "react";
@@ -24,6 +29,7 @@ const customIcon2 = new Icon({
   iconSize: [30, 30], //38, 38
 });
 
+
 const createClusterCustomIcon = function (cluster) {
   return new divIcon({
     html: `<span class="cluster-icon">${cluster.getChildCount()}</span>`,
@@ -33,7 +39,7 @@ const createClusterCustomIcon = function (cluster) {
   });
 };
 
-const markers = [
+const defaultMarkers = [
   {
     geocode: [57.042928, 9.918538],
     popUp: "AALBORG KENNEDY",
@@ -43,6 +49,8 @@ const markers = [
     popUp: "AALBORG VESTERBRO",
   },
 ];
+
+
 
 const locationIcon = new Icon({
   iconUrl: require("./icons/image-removebg-preview (1).png"),
@@ -63,8 +71,11 @@ function LocationMarker() {
         map.setView(e.latlng, 13.4);
         setHasLocated(true);
       }
+
     },
   });
+
+
 
   useEffect(() => {
     map.locate({
@@ -79,29 +90,85 @@ function LocationMarker() {
   );
 }
 
+
 export default function App() {
+  const [markers, setMarkers] = useState(defaultMarkers);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchMarkers = async () => {
+      try {
+        setLoading(true);
+        const { data, error } = await supabase
+          .from("Vejbod")
+          .select("*");
+
+
+        if (error) {
+          console.error("Supabase error:", error);
+          setError(error.message);
+          setMarkers(defaultMarkers);
+        } else if (data && data.length > 0) {
+
+
+          const transformedMarkers = data.map((item) => ({
+            geocode: [item.latitude, item.longitude],
+            popUp: item.name || "Vejbod",
+          })
+        );
+
+
+          setMarkers(transformedMarkers);
+          console.log("Loaded markers:", transformedMarkers);
+        } else {
+          setMarkers(defaultMarkers);
+        }
+
+      } catch (err) {
+        console.error("Error fetching markers:", err);
+        setError(err.message);
+        setMarkers(defaultMarkers);
+
+      } finally {
+        setLoading(false);
+    }};
+
+
+
+
+    fetchMarkers();
+  }, []);
+
   return (
-    <MapContainer center={[0, 0]} zoom={0}>
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
+    <div>
+      {loading && <p>Loading markers...</p>}
+      {error && <p style={{ color: "red" }}>Error: {error}</p>}
+      <MapContainer center={[0, 0]} zoom={0}>
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
 
-      <LocationMarker />
 
-      <MarkerClusterGroup
-        chunkedLoading
-        iconCreateFunction={createClusterCustomIcon}
-      >
-        {markers.map((marker) => (
-          <Marker position={marker.geocode} icon={customIcon2}>
-            <Popup>{marker.popUp}</Popup>
-          </Marker>
-        ))}
-      </MarkerClusterGroup>
-    </MapContainer>
+        <LocationMarker />
+
+        <MarkerClusterGroup
+          chunkedLoading
+          iconCreateFunction={createClusterCustomIcon}
+        >
+          {markers.map((marker, index) => (
+            <Marker key={index} position={marker.geocode} icon={customIcon2}>
+              <Popup>{marker.popUp}</Popup>
+            </Marker>
+          ))}
+          
+        </MarkerClusterGroup>
+      </MapContainer>
+    </div>
   );
 }
+
 
 //<MapContainer center={[57.050028, 9.965567]} zoom={15}>
 //  <MapClickHandler />
