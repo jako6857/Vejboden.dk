@@ -38,9 +38,10 @@ export default function RatingModal({
             (star) => (
               <button
                 key={star}
-                onClick={() =>
-                  setSelected(star)
-                }
+                type="button"
+                aria-label={`Vælg ${star} stjerner`}
+                aria-pressed={star === selected}
+                onClick={() => setSelected(star)}
               >
                 <Star
                   size={36}
