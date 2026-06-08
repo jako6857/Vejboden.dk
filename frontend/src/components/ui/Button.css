@@ -1,0 +1,17 @@
+.button {
+  background: var(--harvest-green);
+  color: white;
+
+  padding: 12px 24px;
+
+  border-radius: var(--radius-lg);
+
+  font-size: 16px;
+  font-weight: 500;
+
+  transition: var(--transition-normal);
+}
+
+.button:hover {
+  background: var(--earth-brown);
+}

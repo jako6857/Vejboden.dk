@@ -1,0 +1,37 @@
+.filters {
+  display: flex;
+  gap: 12px;
+
+  overflow-x: auto;
+
+  padding-bottom: 8px;
+
+  margin-bottom: 40px;
+}
+
+.pill {
+  background: white;
+
+  border:
+    1px solid rgba(0,0,0,0.1);
+
+  border-radius: 999px;
+
+  padding: 10px 18px;
+
+  font-size: 14px;
+
+  transition: 200ms;
+
+  white-space: nowrap;
+}
+
+.pill:hover {
+  background: var(--cream);
+}
+
+.pill.active {
+  background: var(--harvest-green);
+
+  color: white;
+}

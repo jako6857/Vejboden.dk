@@ -1,3 +1,274 @@
+/* ========================================
+   IMPORTS
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+/* ========================================
+   VARIABLES
+
+:root {
+  --harvest-green: #4A7C4E;
+  --earth-brown: #8B5A3C;
+  --cream: #FFF8E7;
+  --tomato-red: #D64545;
+  --carrot-orange: #F2994A;
+  --sky-blue: #56CCF2;
+
+  --charcoal: #2D3436;
+  --stone-gray: #636E72;
+  --light-gray: #F5F5F5;
+  --white: #FFFFFF;
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
+
+  --transition-fast: 150ms;
+  --transition-normal: 200ms;
+}
+
+/* ========================================
+   RESET
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background: var(--cream);
+  color: var(--charcoal);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+img {
+  width: 100%;
+  display: block;
+}
+
+/* ========================================
+   LAYOUT
+
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 32px;
+}
+
+/* ========================================
+   SHARED COMPONENTS
+
+.primary-btn {
+  background: var(--harvest-green);
+  color: white;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 16px;
+  transition: 0.2s;
+}
+
+.primary-btn:hover {
+  background: var(--earth-brown);
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.rating .reviews {
+  color: var(--stone-gray);
+  font-size: 12px;
+}
+
+/* ========================================
+   STALL DETAIL PAGE
+
+.stall-detail {
+  min-height: 100vh;
+  background: var(--cream);
+  padding: 32px 0;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 24px;
+  color: var(--harvest-green);
+  font-weight: 500;
+}
+
+.detail-image {
+  width: 100%;
+  height: 320px;
+  border-radius: 16px;
+  margin-bottom: 24px;
+
+  background: linear-gradient(
+    135deg,
+    var(--harvest-green),
+    var(--earth-brown)
+  );
+}
+
+.detail-location {
+  color: var(--stone-gray);
+  margin-bottom: 12px;
+}
+
+.detail-rating {
+  margin-bottom: 24px;
+  color: var(--carrot-orange);
+  font-weight: 600;
+}
+
+.stall-detail section {
+  margin-top: 32px;
+}
+
+.stall-detail h2 {
+  margin-bottom: 12px;
+}
+
+/* ========================================
+   CREATE STALL PAGE
+
+.create-stall {
+  min-height: 100vh;
+  background: var(--cream);
+  padding: 48px 0;
+}
+
+.create-stall h1 {
+  margin-bottom: 12px;
+}
+
+.stall-form {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 700px;
+}
+
+.stall-form label {
+  font-weight: 500;
+}
+
+.stall-form input,
+.stall-form textarea {
+  padding: 14px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: white;
+}
+
+/* ========================================
+   EMPTY STATE
+
+.empty-state {
+  width: 100%;
+  padding: 64px 24px;
+  text-align: center;
+  background: white;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ========================================
+   SKELETON
+
+.skeleton-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.skeleton-image {
+  height: 180px;
+  background: #ececec;
+}
+
+.skeleton-content {
+  padding: 16px;
+}
+
+.skeleton-line {
+  height: 16px;
+  background: #ececec;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  animation: pulse 1.5s infinite;
+}
+
+.skeleton-line.short {
+  width: 60%;
+}
+
+@keyframes pulse {
+  0% { opacity: .5; }
+  50% { opacity: 1; }
+  100% { opacity: .5; }
+}
+
+/* ========================================
+   ERROR STATE
+
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  padding: 64px 24px;
+
+  background: white;
+  border-radius: 16px;
+
+  box-shadow: var(--shadow-sm);
+}
+
+/* ========================================
+   RESPONSIVE
+
+@media (max-width: 1024px) {
+  .container {
+    padding-inline: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-inline: 16px;
+  }
+
+  .detail-image {
+    height: 220px;
+  }
+}
 :root {
   --background: #ffffff;
   --foreground: #171717;

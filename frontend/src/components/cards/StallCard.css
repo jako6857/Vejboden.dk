@@ -1,0 +1,223 @@
+.stall-card {
+  background: white;
+
+  border-radius: 12px;
+
+  overflow: hidden;
+
+  box-shadow: var(--shadow-sm);
+
+  transition: 300ms;
+}
+
+.stall-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow: var(--shadow-md);
+}
+
+.stall-image {
+  height: 180px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--harvest-green),
+      var(--earth-brown)
+    );
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 48px;
+}
+
+.stall-content {
+  padding: 16px;
+}
+
+.stall-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+
+  margin-bottom: 16px;
+}
+
+.stall-header h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.distance {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  color: var(--stone-gray);
+
+  font-size: 14px;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  font-size: 14px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  margin-bottom: 20px;
+}
+
+.tag {
+  background: var(--cream);
+
+  color: var(--harvest-green);
+
+  border-radius: 999px;
+
+  padding: 6px 12px;
+
+  font-size: 12px;
+}
+
+.details-btn {
+  display: block;
+  width: 100%;
+
+  background: var(--harvest-green);
+
+  color: white;
+
+  padding: 12px;
+
+  border-radius: 12px;
+
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+
+  transition: 200ms;
+}
+
+.details-btn:hover {
+  background: var(--earth-brown);
+}
+
+.rate-btn {
+  width: 100%;
+
+  margin-top: 12px;
+
+  padding: 12px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: var(--harvest-green);
+
+  color: white;
+
+  font-size: 16px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.rate-btn:hover {
+  background: var(--earth-brown);
+}
+
+.modal-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  background: rgba(
+    0,
+    0,
+    0,
+    0.5
+  );
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  z-index: 999;
+}
+
+.rating-modal {
+  background: white;
+
+  padding: 32px;
+
+  border-radius: 16px;
+
+  width: 90%;
+
+  max-width: 420px;
+}
+
+.star-picker {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  margin: 24px 0;
+}
+
+.star-picker button {
+  background: none;
+
+  border: none;
+
+  cursor: pointer;
+}
+
+.modal-actions {
+  display: flex;
+
+  gap: 12px;
+}
+
+.cancel-btn,
+.submit-btn {
+  flex: 1;
+
+  padding: 12px;
+
+  border-radius: 12px;
+
+  border: none;
+
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background: var(
+    --light-gray
+  );
+}
+
+.submit-btn {
+  background: var(
+    --harvest-green
+  );
+
+  color: white;
+}
