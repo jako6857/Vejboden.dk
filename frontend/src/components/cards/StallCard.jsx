@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { MapPin } from "lucide-react";
 
 import RatingStars from "../ui/RatingStars";
@@ -49,9 +50,12 @@ export default function StallCard({
           )}
         </div>
 
-        <button className="details-btn">
-          Se detaljer
-        </button>
+        <Link
+            href={`/stall/${stall.id}`}
+            className="details-btn"
+          >
+            Se detaljer
+        </Link>
 
         <RateButton />
 
