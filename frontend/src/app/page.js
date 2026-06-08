@@ -16,26 +16,6 @@ export default function Home() {
 
       <section className="container">
         <StallExplorer stalls={stalls} />
-
-        <FilterPills />
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns:
-              "repeat(auto-fit, minmax(280px, 1fr))",
-            gap: "24px",
-            paddingBottom: "64px",
-          }}
-        >
-          {stalls.map((stall) => (
-            <StallCard
-              key={stall.id}
-              stall={stall}
-            />
-          ))}
-        </div>
-
       </section>
 
       <Footer />
